@@ -374,7 +374,7 @@
             });
 
             // 円柱ポリゴン高さ倍率
-            const height_scale = 300;
+            const height_scale = 100;
 
             // 降水量円柱ポリゴンレイヤ
             map.addLayer({
@@ -394,7 +394,7 @@
                         ["<", ["/", ["get", "height"], height_scale], 30], 'rgba(255, 245, 0, 0.8)',
                         ["<", ["/", ["get", "height"], height_scale], 50], 'rgba(255, 153, 0, 0.8)',
                         ["<", ["/", ["get", "height"], height_scale], 80], 'rgba(255, 40, 0, 0.8)',
-                        'rgba(180, 0, 104, 0.8)' // 降水量が400mm以上のとき
+                        'rgba(180, 0, 104, 0.8)' // 降水量が80mm以上のとき
                     ],
                     // 'fill-extrusion-height': ['get', 'height'],
                     'fill-extrusion-height': [
@@ -416,7 +416,18 @@
                 'maxzoom': 23,
                 'layout': {
                     // 'text-field': ['get', '観測所名'],
-                    'text-field': ['concat', ['get', '観測所名'], '\n', ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'],
+                    // 'text-field': ['concat', ['get', '観測所名'], '\n', ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'],
+                    'text-field': [
+                        'concat',
+                        ['get', '観測所名'], '\n',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の年']],
+                        '年',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の月']],
+                        '月',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の日']],
+                        '日', '\n',
+                        ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'
+                    ],
                     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
                     'text-size': 10,
                     'text-offset': [1, -1],
@@ -526,11 +537,11 @@
             });
 
             // 円柱ポリゴン高さ倍率
-            var height_scale = 300;
+            var height_scale = 0;
 
             if (GeoJSONName === 'ame_master_add_pre1h00_rct') {
                 // 円柱ポリゴン高さ倍率
-                height_scale = 300;
+                height_scale = 100;
                 // 1時間降水量円柱ポリゴンレイヤ
                 map.addLayer({
                     'id': 'extrusion',
@@ -563,7 +574,7 @@
                 });
             } else if (GeoJSONName === 'ame_master_add_pre3h00_rct') {
                 // 円柱ポリゴン高さ倍率
-                height_scale = 150;
+                height_scale = 80;
                 // 3時間降水量円柱ポリゴンレイヤ
                 map.addLayer({
                     'id': 'extrusion',
@@ -596,7 +607,7 @@
                 });
             } else if (GeoJSONName === 'ame_master_add_pre6h00_rct') {
                 // 円柱ポリゴン高さ倍率
-                height_scale = 150;
+                height_scale = 70;
                 // 6時間降水量円柱ポリゴンレイヤ
                 map.addLayer({
                     'id': 'extrusion',
@@ -629,7 +640,7 @@
                 });
             } else if (GeoJSONName === 'ame_master_add_pre12h00_rct') {
                 // 円柱ポリゴン高さ倍率
-                height_scale = 150;
+                height_scale = 60;
                 // 12時間降水量円柱ポリゴンレイヤ
                 map.addLayer({
                     'id': 'extrusion',
@@ -770,7 +781,18 @@
                 'maxzoom': 23,
                 'layout': {
                     // 'text-field': ['get', '観測所名'],
-                    'text-field': ['concat', ['get', '観測所名'], '\n', ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'],
+                    // 'text-field': ['concat', ['get', '観測所名'], '\n', ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'],
+                    'text-field': [
+                        'concat',
+                        ['get', '観測所名'], '\n',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の年']],
+                        '年',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の月']],
+                        '月',
+                        ['to-string', ['get', '昨日までの観測史上1位の値の日']],
+                        '日', '\n',
+                        ['to-string', ['get', '昨日までの観測史上1位の値(mm)']], 'mm'
+                    ],
                     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
                     'text-size': 10,
                     'text-offset': [1, -1],
